@@ -2,6 +2,8 @@ var express = require('express'),
 	app = express(),
 	filmService = require('./filmService');
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/api/films', function (req, res) {
 	res.send(filmService.getFilmList());
 });
