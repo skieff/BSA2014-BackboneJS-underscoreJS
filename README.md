@@ -13,7 +13,7 @@ git clone git@github.com:msemenistyi/BSA2014-BackboneJS-underscoreJS.git
 ```shell
 cd BSA2014-BackboneJS-underscoreJS/
 ```
-- Install all the depandencies
+- Install all the dependencies
 ```shell
 npm install
 ```
