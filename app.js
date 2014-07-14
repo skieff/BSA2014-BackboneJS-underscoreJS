@@ -40,7 +40,10 @@ app.get('/', function(req, res){
 		'where %id% is id of the film from the list',
 		'<br />',
 		'<b>localhost:3000/api/filmdetails?name=%filmname%</b>',
-		'where <b>%filmname%</b> is a name of the film from the filmlist'];
+		'where <b>%filmname%</b> is a name of the film from the filmlist',
+		'<br />',
+		'<b>localhost:3000/app</b>',
+		'this is the root of your web app'];
 	res.send(text.join('<br />'));
 
 });
