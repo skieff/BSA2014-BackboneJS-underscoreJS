@@ -19,3 +19,11 @@
 .film-container{
 	clear: both;
 }
+
+.film-remove:hover {
+    cursor: pointer;
+}
+
+.film-container:hover {
+    background-color: lightsteelblue;
+}
