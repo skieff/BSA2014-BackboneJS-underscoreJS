@@ -2,10 +2,9 @@ var _ = require("underscore");
 
 var FilmService = function(){
 
-	this.getFilm = function(name){
-		return _.find(this.FilmList, function(item){
-			return item.name === name;
-		});
+	this.getFilm = function(id){
+		id = Number(id);
+		return _.findWhere(this.FilmList, {id: id});
 	};
 
 	this.getFilmList = function(id){
@@ -24,10 +23,13 @@ var FilmService = function(){
 	this.deleteFilm = function(id){
 		this.FilmList = _.reject(this.FilmList, function(item){return item.id === Number(id);});
 	}
-
+	
 	this.addFilm = function(item){
-		this.FilmList.push(JSON.parse(item));
-	}
+		var film = item;
+		var ids = _.pluck(this.FilmList, 'id');
+		item['id'] = _.max(ids) + 1;
+		this.FilmList.push(film);
+	};
 
 	this.FilmList = [
 		{

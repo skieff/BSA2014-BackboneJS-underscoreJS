@@ -1,8 +1,10 @@
 var express = require('express'),
 	app = express(),
+  bodyParser = require('body-parser'),
 	filmService = require('./filmService');
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
 
 app.get('/api/films', function (req, res) {
 	res.send(filmService.getFilmList());
@@ -24,11 +26,13 @@ app.delete('/api/films/:id', function (req, res) {
 
 app.put('/api/films/:id', function (req, res) {
 	var film = filmService.addFilm(req.params.id);
+  filmService.addFilm(req.body);
+  res.status(200);
 	res.end();
 });
 
-app.get('/api/filmdetails', function (req, res) {
-	res.send(filmService.getFilm(req.query.name));
+app.get('/api/filmdetails/:id', function (req, res) {
+	res.send(filmService.getFilm(req.params.id));
 });
 
 app.get('/', function(req, res){
@@ -36,10 +40,10 @@ app.get('/', function(req, res){
 		'<b>localhost:3000/api/films</b>',
 		'returns the list of films available',
 		'<br />',
-		'<b>localhost:3000/api/film/%id%</b>',
+		'<b>localhost:3000/api/films/%id%</b>',
 		'where %id% is id of the film from the list',
 		'<br />',
-		'<b>localhost:3000/api/filmdetails?name=%filmname%</b>',
+		'<b>localhost:3000/api/filmdetails/%id%</b>',
 		'where <b>%filmname%</b> is a name of the film from the filmlist',
 		'<br />',
 		'<b>localhost:3000/app</b>',
