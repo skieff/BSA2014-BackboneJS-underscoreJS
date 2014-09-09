@@ -2,6 +2,7 @@ var Film = Backbone.Model.extend({
 	defaults:{
 		year: 2014,
 		name: '',
-		id: undefined
+		id: undefined,
+        editing: false
 	}
 });

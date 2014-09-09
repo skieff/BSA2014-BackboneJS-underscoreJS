@@ -20,10 +20,14 @@
 	clear: both;
 }
 
-.film-remove:hover {
+.film-remove:hover, .film-edit:hover , .film-edit-cancel:hover {
     cursor: pointer;
 }
 
-.film-container:hover {
+.film-edit-cancel {
+    text-decoration: line-through;
+}
+
+.film-container:hover  {
     background-color: lightsteelblue;
 }
