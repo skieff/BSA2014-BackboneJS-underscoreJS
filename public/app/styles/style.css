@@ -24,7 +24,7 @@
 	clear: both;
 }
 
-.film-remove:hover, .film-edit:hover , .film-edit-cancel:hover {
+.film-remove:hover, .film-edit:hover , .film-edit-cancel:hover, .film-edit-save:hover {
     cursor: pointer;
 }
 

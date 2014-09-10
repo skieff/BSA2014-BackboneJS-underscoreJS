@@ -27,5 +27,18 @@ var Film = Backbone.Model.extend({
         if (this.isNew()) {
             this.collection.remove(this.model);
         }
+    },
+
+    saveChanges: function(data) {
+        this.save(
+            data,
+            {
+                wait:true,
+                success: function(model) {
+                    console.log(model);
+                    model.set('editing', false);
+                }
+            }
+        );
     }
 });
