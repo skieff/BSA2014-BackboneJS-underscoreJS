@@ -13,24 +13,15 @@ var FilmView = Backbone.View.extend({
 	},
 
     onRemoveClick: function() {
-        if (this.model.isNew()) {
-            this.model.collection.remove(this.model);
-        } else {
-            this.model.destroy({
-                success: function(model) {
-                    model.collection.remove(model);
-                }
-            });
-        }
-
+        this.model.deleteFilm();
     },
 
     onEditClick: function() {
-        this.model.set('editing', true);
+        this.model.startEditing();
     },
 
     onEditCancelClick: function() {
-        this.model.set('editing', false);
+        this.model.cancelChanges();
     },
 
     onModelRemove: function() {
