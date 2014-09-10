@@ -16,6 +16,10 @@
 	float: left;
 }
 
+.film-name input,.film-year input {
+    width: 90%;
+}
+
 .film-container{
 	clear: both;
 }
