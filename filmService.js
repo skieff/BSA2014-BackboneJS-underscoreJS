@@ -22,7 +22,7 @@ var FilmService = function(){
 
 	this.deleteFilm = function(id){
 		this.FilmList = _.reject(this.FilmList, function(item){return item.id === Number(id);});
-	}
+	};
 	
 	this.addFilm = function(item){
 		var film = item;
@@ -30,6 +30,16 @@ var FilmService = function(){
 		item['id'] = _.max(ids) + 1;
 		this.FilmList.push(film);
 	};
+
+    this.updateFilm = function(id, item) {
+        var film = this.getFilm(id);
+
+        if (film) {
+            _.extend(film, item);
+        }
+
+        return film;
+    };
 
 	this.FilmList = [
 		{

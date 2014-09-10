@@ -25,7 +25,17 @@ app.delete('/api/films/:id', function (req, res) {
 });
 
 app.put('/api/films/:id', function (req, res) {
-	var film = filmService.addFilm(req.params.id);
+	var film = filmService.updateFilm(req.params.id, req.body);
+
+    if (film) {
+        res.status(200);
+    } else {
+        res.status(404);
+    }
+	res.end();
+});
+
+app.post('/api/films/:id', function (req, res) {
   filmService.addFilm(req.body);
   res.status(200);
 	res.end();
