@@ -28,7 +28,7 @@ app.put('/api/films/:id', function (req, res) {
 	var film = filmService.updateFilm(req.params.id, req.body);
 
     if (film) {
-        res.status(200);
+        res.send(film);
     } else {
         res.status(404);
     }
