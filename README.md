@@ -27,9 +27,12 @@ localhost:3000
 ```
 
 ###What should be done?
-Add possibility to add films.
-Add possibility to rename films.
-Add possibility to remove films.
+
+####V1
+
+- Add possibility to add films.
+- Add possibility to rename films.
+- Add possibility to remove films.
 
 You should add a button for remove and add action.
 
@@ -39,3 +42,9 @@ Add implies inputs for name and year, id may be generated automatically.
 On item click, view should be changed to display film details with 'back to the list' button. 
 Routing should work so that copying link and openning in new tab should open the same view you are in.
 
+####V2
+
+- Add support for Jade instead of HTML and Stylus instead of CSS to current project.
+- Convert all modules to AMD.
+- requirejs should be used to request single js file.
+- Use grunt to run jshint on project source
