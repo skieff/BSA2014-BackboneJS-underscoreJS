@@ -7,9 +7,10 @@
 </head>
 <body>
 	<div id="films-container"></div>
+    <button class="back-to-list">Back To List</button>
 	<script type="text/template" id="film-template">
 		<span class="film-id"><%= id %></span>
-		<span class="film-name"><%= name %></span>
+		<span class="film-name"><a href="#films/<%= id %>"><%= name %></a></span>
 		<span class="film-year"><%= year %></span>
         <span class="film-remove">-</span>
         <span class="film-edit">v</span>
@@ -31,5 +32,11 @@
 	<script src="./javascripts/FilmView.js"></script>
 	<script src="./javascripts/FilmCollection.js"></script>
 	<script src="./javascripts/FilmCollectionView.js"></script>
+    <script src="./javascripts/Router.js"></script>
+    <script>
+        $(function(){
+            Backbone.history.start();
+        });
+    </script>
 </body>
 </html>
