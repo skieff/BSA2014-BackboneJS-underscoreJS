@@ -5,11 +5,11 @@ var AppRouter = Backbone.Router.extend({
     },
 
     viewFilm: function(filmId) {
-        console.log(filmId);
+        Backbone.trigger('viewFilmDetails');
     },
 
     viewList: function() {
-        console.log('view list');
+        Backbone.trigger('showList');
     },
 
     navigateToTheList: function() {
