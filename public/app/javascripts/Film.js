@@ -6,7 +6,7 @@ var Film = Backbone.Model.extend({
 	},
     deleteFilm: function() {
         if (this.isNew()) {
-            this.collection.remove(this.model);
+            this.collection.remove(this);
         } else {
             this.destroy({
                 success: function(model) {
