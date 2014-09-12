@@ -7,6 +7,8 @@ var FilmCollectionView = Backbone.View.extend({
 
     syncPromise: null,
 
+    fullScreenView: null,
+
 	initialize: function(){
         /**
          * when view is initialized collection is not populated with models yet
@@ -38,19 +40,27 @@ var FilmCollectionView = Backbone.View.extend({
     },
 
     _doAdd: function() {
-        var newFilm = this.collection.add({}),
-            filmView;
+        var newFilm = this.collection.add({});
 
+        this.removeFullScreenView();
         this.hideList();
-        filmView = new FullScreenFilmView({
+        this.fullScreenView = new FullScreenFilmView({
             model: newFilm
         });
-        this.$el.find('#film-details').append(filmView.$el);
+        this.$el.find('#film-details').append(this.fullScreenView.$el);
     },
 
     showList: function() {
+        this.removeFullScreenView();
         this.$el.find('#films-container').show();
         this.$el.find('.add-film').show();
+    },
+
+    removeFullScreenView: function() {
+        if (this.fullScreenView) {
+            this.fullScreenView.close();
+            this.fullScreenView = null;
+        }
     },
 
     hideList: function() {
@@ -63,15 +73,16 @@ var FilmCollectionView = Backbone.View.extend({
     },
 
     _doView: function(filmId) {
-        var film = this.collection.findWhere({id: filmId}),
-            filmView;
+        var film = this.collection.findWhere({id: filmId});
+
+        this.removeFullScreenView();
 
         if (film) {
             this.hideList();
-            filmView = new FullScreenFilmView({
+            this.fullScreenView = new FullScreenFilmView({
                 model: film
             });
-            this.$el.find('#film-details').append(filmView.$el);
+            this.$el.find('#film-details').append(this.fullScreenView.$el);
         } else {
             appRouter.navigateToTheList();
         }

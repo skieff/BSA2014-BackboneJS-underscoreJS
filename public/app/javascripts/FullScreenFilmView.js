@@ -7,8 +7,6 @@ var FullScreenFilmView = Backbone.View.extend({
     },
 
     initialize: function(){
-        this.listenTo(Backbone, 'showList', this.onShowList);
-
         this.render();
     },
 
@@ -32,7 +30,10 @@ var FullScreenFilmView = Backbone.View.extend({
         );
     },
 
-    onShowList: function() {
+    close: function() {
+        if (this.model.isNew()) {
+            this.model.deleteFilm();
+        }
         this.remove();
     },
 
