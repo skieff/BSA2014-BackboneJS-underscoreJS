@@ -5,7 +5,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     viewFilm: function(filmId) {
-        Backbone.trigger('viewFilmDetails');
+        Backbone.trigger('viewFilmDetails', parseInt(filmId));
     },
 
     viewList: function() {
