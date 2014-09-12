@@ -2,6 +2,7 @@ var FilmView = Backbone.View.extend({
 	className: 'film-container',
 	template: _.template($('#film-template').html()),
     editTemplate: _.template($('#film-edit-inline-template').html()),
+    editMode: false,
 
 	initialize: function(){
         this.$el.on('click.film-view', '.film-remove', $.proxy(this.onRemoveClick, this));
@@ -10,39 +11,51 @@ var FilmView = Backbone.View.extend({
         this.$el.on('click.film-view', '.film-edit-save', $.proxy(this.onEditSaveClick, this));
 
         this.listenTo(this.model, 'remove', this.onModelRemove);
-        this.listenTo(this.model, 'change:editing', this.onEditingChange);
+        this.listenTo(this.model, 'change', this.render);
 		this.render();
 	},
+
+    switchToEditMode: function() {
+        this.editMode = true;
+        this.render();
+    },
+
+    switchToReadOnlyMode: function() {
+        this.editMode = false;
+        this.render();
+    },
 
     onRemoveClick: function() {
         this.model.deleteFilm();
     },
 
     onEditClick: function() {
-        this.model.startEditing();
+        this.switchToEditMode();
     },
 
     onEditCancelClick: function() {
-        this.model.cancelChanges();
+        this.switchToReadOnlyMode();
     },
 
     onEditSaveClick: function() {
-        this.model.saveChanges({
-            name: this.$el.find('[name="filmName"]').val(),
-            year: this.$el.find('[name="filmYear"]').val()
-        });
+        this.model.save(
+            {
+                name: this.$el.find('[name="filmName"]').val(),
+                year: this.$el.find('[name="filmYear"]').val()
+            },
+            {
+                wait:true,
+                success: $.proxy(this.switchToReadOnlyMode, this)
+            }
+        );
     },
 
     onModelRemove: function() {
         this.remove();
     },
 
-    onEditingChange: function() {
-        this.render();
-    },
-
 	render: function(){
-        if (this.model.get('editing')) {
+        if (this.editMode) {
             this.$el.html(this.editTemplate(this.model.toJSON()));
         } else {
             this.$el.html(this.template(this.model.toJSON()));
