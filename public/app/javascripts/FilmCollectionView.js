@@ -1,10 +1,28 @@
 var FilmCollectionView = Backbone.View.extend({
 	el: '#films-view',
 	initialize: function(){
+        console.log(this.collection);
+
+        this.$el.on('click', '.add-film', $.proxy(this.onAddFilmClick, this));
 		this.collection.on('add', this.renderNewFilm, this);
         this.listenTo(Backbone, 'showList', this.showList);
+        this.listenTo(Backbone, 'addNewFilm', this.onAddFilm);
         this.listenTo(Backbone, 'viewFilmDetails', this.onViewFilmDetails);
 	},
+
+    onAddFilmClick: function() {
+        appRouter.navigateAddFilm();
+    },
+
+    onAddFilm: function() {
+        var newFilm = this.collection.add({});
+
+        this.hideList();
+        filmView = new FullScreenFilmView({
+            model: newFilm
+        });
+        this.$el.find('#film-details').append(filmView.$el);
+    },
 
     showList: function() {
         this.$el.find('#films-container').show();
@@ -23,7 +41,7 @@ var FilmCollectionView = Backbone.View.extend({
         if (film) {
             this.hideList();
             filmView = new FullScreenFilmView({
-                model: this.collection.findWhere({id: filmId})
+                model: film
             });
             this.$el.find('#film-details').append(filmView.$el);
         } else {
