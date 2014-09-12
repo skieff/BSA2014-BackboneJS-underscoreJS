@@ -1,7 +1,7 @@
 var FilmView = Backbone.View.extend({
 	className: 'film-container',
 	template: _.template($('#film-template').html()),
-    editTemplate: _.template($('#film-edit-template').html()),
+    editTemplate: _.template($('#film-edit-inline-template').html()),
 
 	initialize: function(){
         this.$el.on('click.film-view', '.film-remove', $.proxy(this.onRemoveClick, this));
