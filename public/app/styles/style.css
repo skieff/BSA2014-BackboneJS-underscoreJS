@@ -35,3 +35,7 @@
 .film-container:hover  {
     background-color: lightsteelblue;
 }
+
+#films-container {
+    margin-bottom: 10px;
+}

@@ -16,17 +16,17 @@
 		<span class="film-id"><%= id %></span>
 		<span class="film-name"><a href="#films/<%= id %>"><%= name %></a></span>
 		<span class="film-year"><%= year %></span>
-        <span class="film-remove">-</span>
-        <span class="film-edit">v</span>
+        <button class="film-remove">Remove</button>
+        <button class="film-edit">Edit</button>
 	</script>
 
 	<script type="text/template" id="film-edit-inline-template">
 		<span class="film-id"><%= id %></span>
         <span class="film-name"><input type="text" name="filmName" value="<%= name %>" /></span>
         <span class="film-year"><input type="text" name="filmYear" value="<%= year %>" /></span>
-        <span class="film-remove">-</span>
-        <span class="film-edit-cancel">v</span>
-        <span class="film-edit-save">v</span>
+        <button class="film-remove">Remove</button>
+        <button class="film-edit-cancel">Cancel</button>
+        <button class="film-edit-save">Save</button>
 	</script>
 
     <script type="text/template" id="film-edit-full-screen-template">

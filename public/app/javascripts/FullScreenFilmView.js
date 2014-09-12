@@ -1,9 +1,12 @@
 var FullScreenFilmView = Backbone.View.extend({
     template: _.template($('#film-edit-full-screen-template').html()),
 
+    events: {
+        'click .back-to-list': 'onBackToListClick',
+        'click .save-changes': 'onSaveChangesClick'
+    },
+
     initialize: function(){
-        this.$el.on('click', '.back-to-list', $.proxy(this.onBackToListClick, this));
-        this.$el.on('click', '.save-changes', $.proxy(this.onSaveChangesClick, this));
         this.listenTo(Backbone, 'showList', this.onShowList);
 
         this.render();

@@ -4,12 +4,14 @@ var FilmView = Backbone.View.extend({
     editTemplate: _.template($('#film-edit-inline-template').html()),
     editMode: false,
 
-	initialize: function(){
-        this.$el.on('click.film-view', '.film-remove', $.proxy(this.onRemoveClick, this));
-        this.$el.on('click.film-view', '.film-edit', $.proxy(this.onEditClick, this));
-        this.$el.on('click.film-view', '.film-edit-cancel', $.proxy(this.onEditCancelClick, this));
-        this.$el.on('click.film-view', '.film-edit-save', $.proxy(this.onEditSaveClick, this));
+    events : {
+        'click .film-remove' : 'onRemoveClick',
+        'click .film-edit' : 'onEditClick',
+        'click .film-edit-cancel' : 'onEditCancelClick',
+        'click .film-edit-save' : 'onEditSaveClick'
+    },
 
+	initialize: function(){
         this.listenTo(this.model, 'remove', this.onModelRemove);
         this.listenTo(this.model, 'change', this.render);
 		this.render();

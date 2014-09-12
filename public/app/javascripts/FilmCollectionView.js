@@ -1,6 +1,10 @@
 var FilmCollectionView = Backbone.View.extend({
 	el: '#films-view',
 
+    events: {
+        'click .add-film': 'onAddFilmClick'
+    },
+
     syncPromise: null,
 
 	initialize: function(){
@@ -19,8 +23,7 @@ var FilmCollectionView = Backbone.View.extend({
             syncDeferred.resolve();
         });
 
-        this.$el.on('click', '.add-film', $.proxy(this.onAddFilmClick, this));
-		this.collection.on('add', this.renderNewFilm, this);
+        this.listenTo(this.collection, 'add', this.renderNewFilm);
         this.listenTo(Backbone, 'showList', this.showList);
         this.listenTo(Backbone, 'addNewFilm', this.onAddFilm);
         this.listenTo(Backbone, 'viewFilmDetails', this.onViewFilmDetails);
