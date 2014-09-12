@@ -35,9 +35,10 @@ app.put('/api/films/:id', function (req, res) {
 	res.end();
 });
 
-app.post('/api/films/:id', function (req, res) {
-  filmService.addFilm(req.body);
-  res.status(200);
+app.post('/api/films', function (req, res) {
+    var film = filmService.addFilm(req.body);
+
+    res.send(film);
 	res.end();
 });
 
