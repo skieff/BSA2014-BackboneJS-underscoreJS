@@ -1,29 +1,33 @@
-var AppRouter = Backbone.Router.extend({
-    routes: {
-        "films/new":     "newFilm",
-        "films/:filmId":     "viewFilm",
-        "": "viewList"
-    },
+define(function(require){
+    var Backbone = require('./backbone');
 
-    newFilm: function() {
-        Backbone.trigger('addNewFilm');
-    },
+    return Backbone.Router.extend({
+        routes: {
+            "films/new":     "newFilm",
+            "films/:filmId":     "viewFilm",
+            "": "viewList"
+        },
 
-    viewFilm: function(filmId) {
-        Backbone.trigger('viewFilmDetails', parseInt(filmId));
-    },
+        newFilm: function() {
+            Backbone.trigger('addNewFilm');
+        },
 
-    viewList: function() {
-        Backbone.trigger('showList');
-    },
+        viewFilm: function(filmId) {
+            Backbone.trigger('viewFilmDetails', parseInt(filmId));
+        },
 
-    navigateAddFilm: function() {
-        this.navigate('films/new', {trigger: true});
-    },
+        viewList: function() {
+            Backbone.trigger('showList');
+        },
 
-    navigateToTheList: function() {
-        this.navigate('', {trigger: true});
-    }
+        navigateAddFilm: function() {
+            this.navigate('films/new', {trigger: true});
+        },
+
+        navigateToTheList: function() {
+            this.navigate('', {trigger: true});
+        }
+    });
+
 });
 
-var appRouter = new AppRouter();

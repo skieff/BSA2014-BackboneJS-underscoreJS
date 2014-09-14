@@ -1,40 +1,45 @@
-var FullScreenFilmView = Backbone.View.extend({
-    template: _.template($('#film-edit-full-screen-template').html()),
+define(function(require){
+    var Backbone = require("./backbone");
 
-    events: {
-        'click .back-to-list': 'onBackToListClick',
-        'click .save-changes': 'onSaveChangesClick'
-    },
+    return Backbone.View.extend({
+        template: _.template($('#film-edit-full-screen-template').html()),
 
-    initialize: function(){
-        this.render();
-    },
+        events: {
+            'click .back-to-list': 'onBackToListClick',
+            'click .save-changes': 'onSaveChangesClick'
+        },
 
-    onBackToListClick: function(){
-        appRouter.navigateToTheList();
-    },
+        initialize: function(){
+            this.render();
+        },
 
-    onSaveChangesClick: function() {
-        this.model.save(
-            {
-                name: this.$el.find('[name="filmName"]').val(),
-                year: this.$el.find('[name="filmYear"]').val()
-            },
-            {
-                wait:true,
-                success: $.proxy(appRouter.navigateToTheList, appRouter)
+        onBackToListClick: function(){
+            appRouter.navigateToTheList();
+        },
+
+        onSaveChangesClick: function() {
+            this.model.save(
+                {
+                    name: this.$el.find('[name="filmName"]').val(),
+                    year: this.$el.find('[name="filmYear"]').val()
+                },
+                {
+                    wait:true,
+                    success: $.proxy(appRouter.navigateToTheList, appRouter)
+                }
+            );
+        },
+
+        close: function() {
+            if (this.model.isNew()) {
+                this.model.deleteFilm();
             }
-        );
-    },
+            this.remove();
+        },
 
-    close: function() {
-        if (this.model.isNew()) {
-            this.model.deleteFilm();
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
         }
-        this.remove();
-    },
-
-    render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-    }
+    });
 });
+
