@@ -11,9 +11,6 @@ var FullScreenFilmView = Backbone.View.extend({
     },
 
     onBackToListClick: function(){
-        if (this.model.isNew()) {
-            this.model.deleteFilm();
-        }
         appRouter.navigateToTheList();
     },
 
