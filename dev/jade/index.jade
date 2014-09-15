@@ -1,0 +1,45 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Films service
+        link(rel='stylesheet', href='./styles/style.css')
+    body
+        #films-view
+            #films-container
+            button.add-film Add Film
+            #film-details
+
+        script#film-template(type="text/template")
+            span.film-id <%= id %>
+            span.film-name
+                a(href!='#films/<%= id %>') <%= name %>
+            span.film-year <%= year %>
+            button.film-remove Remove
+            button.film-edit Edit
+
+        script#film-edit-inline-template(type="text/template")
+            span.film-id <%= id %>
+            span.film-name
+                input(type="text",name="filmName",value!="<%= name %>")
+            span.film-year
+                input(type="text",name="filmYear",value!="<%= year %>")
+            button.film-remove Remove
+            button.film-edit-cancel Cancel
+            button.film-edit-save Save
+
+        script#film-edit-full-screen-template(type="text/template")
+            div
+                label Film Id:
+                    span <%= id %>
+                br
+                label Film Name:
+                    input(type="text",name="filmName",value!="<%= name %>")
+                br
+                label Film Year:
+                    input(type="text",name="filmYear",value!="<%= year %>")
+                br
+            button.save-changes Save Changes
+            button.back-to-list Back To List
+
+        script(data-main="./javascripts/app",src="./javascripts/require.js")
