@@ -10,15 +10,27 @@ module.exports = function(grunt) {
                     pretty: true
                 },
                 files: {
-                    "./public/app/index.html": ["./dev/jade/index.jade"]
+                    "./public/app/index.html": ["./dev/app/index.jade"]
+                }
+            }
+        },
+
+        stylus: {
+            options: {
+                compress: false
+            },
+            compile: {
+                files: {
+                    "./public/app/styles/style.css": "./dev/app/styles/style.styl"
                 }
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
 
     // Default task(s).
-    grunt.registerTask('default', ['jade']);
+    grunt.registerTask('default', ['jade', 'stylus']);
 
 };
