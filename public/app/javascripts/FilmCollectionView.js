@@ -15,8 +15,10 @@ define(function(require){
 
         fullScreenView: null,
 
-        initialize: function(){
-            console.log(this);
+        appRouter: null,
+
+        initialize: function(data){
+            this.appRouter = data.appRouter;
 
             /**
              * when view is initialized collection is not populated with models yet
@@ -40,7 +42,7 @@ define(function(require){
         },
 
         onAddFilmClick: function() {
-            appRouter.navigateAddFilm();
+            this.appRouter.navigateAddFilm();
         },
 
         onAddFilm: function() {
@@ -53,7 +55,8 @@ define(function(require){
             this.removeFullScreenView();
             this.hideList();
             this.fullScreenView = new FullScreenFilmView({
-                model: newFilm
+                model: newFilm,
+                appRouter: this.appRouter
             });
             this.$el.find('#film-details').append(this.fullScreenView.$el);
         },
@@ -88,11 +91,12 @@ define(function(require){
             if (film) {
                 this.hideList();
                 this.fullScreenView = new FullScreenFilmView({
-                    model: film
+                    model: film,
+                    appRouter: this.appRouter
                 });
                 this.$el.find('#film-details').append(this.fullScreenView.$el);
             } else {
-                appRouter.navigateToTheList();
+                this.appRouter.navigateToTheList();
             }
         },
 

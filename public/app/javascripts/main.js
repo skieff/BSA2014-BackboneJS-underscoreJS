@@ -2,12 +2,15 @@ define(function(require){
     var FilmCollection = require("./FilmCollection"),
         FilmCollectionView = require("./FilmCollectionView"),
         AppRouter = require("./Router"),
-        Backbone = require("./backbone");
+        Backbone = require("./backbone"),
+        domReady = require("./domReady");
 
-    var filmsView = new FilmCollectionView({
-        collection: new FilmCollection(),
-        appRouter: new AppRouter()
+    domReady(function(){
+        new FilmCollectionView({
+            collection: new FilmCollection(),
+            appRouter: new AppRouter()
+        });
+
+        Backbone.history.start();
     });
-
-    Backbone.History.start();
 });

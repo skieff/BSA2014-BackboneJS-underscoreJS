@@ -9,12 +9,15 @@ define(function(require){
             'click .save-changes': 'onSaveChangesClick'
         },
 
-        initialize: function(){
+        appRouter: null,
+
+        initialize: function(data){
+            this.appRouter = data.appRouter;
             this.render();
         },
 
         onBackToListClick: function(){
-            appRouter.navigateToTheList();
+            this.appRouter.navigateToTheList();
         },
 
         onSaveChangesClick: function() {
@@ -25,7 +28,7 @@ define(function(require){
                 },
                 {
                     wait:true,
-                    success: $.proxy(appRouter.navigateToTheList, appRouter)
+                    success: $.proxy(this.appRouter.navigateToTheList, this.appRouter)
                 }
             );
         },
