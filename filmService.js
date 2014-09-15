@@ -15,7 +15,7 @@ var FilmService = function(){
 			}
 		} else {
 			return _.map(this.FilmList, function(item){
-				return {name:item.name, year: item.year, id: item.id}
+				return {name:item.name, year: item.year, id: item.id};
 			});
 		}
 	};
@@ -27,7 +27,7 @@ var FilmService = function(){
 	this.addFilm = function(item){
 		var film = item;
 		var ids = _.pluck(this.FilmList, 'id');
-		item['id'] = _.max(ids) + 1;
+		item.id = _.max(ids) + 1;
 		this.FilmList.push(film);
         return film;
 	};
@@ -55,7 +55,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/casablanca-movie-poster-1942-1010351926.jpg",
@@ -69,7 +69,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/scarface-movie-poster-1983-1010197973.jpg",
@@ -83,7 +83,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/gone-with-the-wind-movie-poster-1974-1010271313.jpg",
@@ -97,7 +97,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/star-wars-movie-poster-1977-1010482225.jpg",
@@ -111,7 +111,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/titanic-movie-poster-1997-1010339699.jpg",
@@ -125,7 +125,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/the-matrix-movie-poster-1999-1010265382.jpg",
@@ -139,7 +139,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/pulp-fiction-movie-poster-1994-1010375631.jpg",
@@ -153,7 +153,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/the-godfather-movie-poster-1972-1010267745.jpg",
@@ -167,7 +167,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/rocky-movie-poster-1977-1010260161.jpg",
@@ -181,7 +181,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/fight-club-movie-poster-1999-1010215604.jpg",
@@ -195,7 +195,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/braveheart-movie-poster-1995-1010191193.jpg",
@@ -209,7 +209,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/the-shawshank-redemption-movie-poster-1994-1010191906.jpg",
@@ -223,7 +223,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/the-good-the-bad-and-the-ugly-movie-poster-1966-1010203305.jpg",
@@ -237,7 +237,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/bullitt-movie-poster-1968-1010144161.jpg",
@@ -251,7 +251,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/the-empire-strikes-back-movie-poster-1980-1010482232.jpg",
@@ -265,7 +265,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/caddyshack-movie-poster-1980-1010286017.jpg",
@@ -279,7 +279,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/sunset-boulevard-movie-poster-1950-1010142705.jpg",
@@ -293,7 +293,7 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
+			details8: "details8"
 		},
 		{
 			poster:"http://images.moviepostershop.com/2001-a-space-odyssey-movie-poster-1968-1010144308.jpg",
@@ -307,8 +307,8 @@ var FilmService = function(){
 			details5: "details5",
 			details6: "details6",
 			details7: "details7",
-			details8: "details8",
-		},
+			details8: "details8"
+		}
 	];
 };
 
