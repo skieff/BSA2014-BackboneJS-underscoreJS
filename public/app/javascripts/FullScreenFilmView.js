@@ -1,5 +1,6 @@
 define(function(require){
-    var Backbone = require("./backbone");
+    var Backbone = require("./backbone"),
+        $ = require('./jquery');
 
     return Backbone.View.extend({
         template: _.template($('#film-edit-full-screen-template').html()),
@@ -9,15 +10,12 @@ define(function(require){
             'click .save-changes': 'onSaveChangesClick'
         },
 
-        appRouter: null,
-
-        initialize: function(data){
-            this.appRouter = data.appRouter;
+        initialize: function(){
             this.render();
         },
 
         onBackToListClick: function(){
-            this.appRouter.navigateToTheList();
+            Backbone.trigger('navigate-to-the-list');
         },
 
         onSaveChangesClick: function() {
@@ -28,7 +26,9 @@ define(function(require){
                 },
                 {
                     wait:true,
-                    success: $.proxy(this.appRouter.navigateToTheList, this.appRouter)
+                    success: function(){
+                        Backbone.trigger('navigate-to-the-list');
+                    }
                 }
             );
         },
