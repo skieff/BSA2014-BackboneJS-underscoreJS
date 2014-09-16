@@ -1,5 +1,6 @@
 define(function(require){
-    var Backbone = require('./backbone');
+    var Backbone = require('./backbone'),
+        $ = require('./jquery');
 
     return Backbone.View.extend({
         className: 'film-container',

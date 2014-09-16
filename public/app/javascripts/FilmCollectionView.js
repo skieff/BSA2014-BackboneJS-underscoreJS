@@ -1,7 +1,8 @@
 define(function(require){
     var Backbone = require("./backbone"),
         FilmView = require("./FilmView"),
-        FullScreenFilmView = require("./FullScreenFilmView");
+        FullScreenFilmView = require("./FullScreenFilmView"),
+        $ = require('./jquery');
 
     return Backbone.View.extend({
         el: '#films-view',

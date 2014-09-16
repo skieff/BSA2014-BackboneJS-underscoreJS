@@ -1,5 +1,6 @@
 define(function(require){
-    var Backbone = require("./backbone");
+    var Backbone = require("./backbone"),
+        $ = require('./jquery');
 
     return Backbone.View.extend({
         template: _.template($('#film-edit-full-screen-template').html()),
