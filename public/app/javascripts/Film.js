@@ -8,15 +8,9 @@ define(function(require){
             id: undefined
         },
         deleteFilm: function() {
-            if (this.isNew()) {
-                this.collection.remove(this);
-            } else {
-                this.destroy({
-                    success: function(model) {
-                        model.collection.remove(model);
-                    }
-                });
-            }
+            this.destroy({
+                sync: true
+            });
         }
     });
 });
