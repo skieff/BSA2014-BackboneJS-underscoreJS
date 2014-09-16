@@ -30,6 +30,7 @@ define(function(require){
 
         initialize: function() {
             this.listenTo(Backbone, 'navigate-to-the-list', this.navigateToTheList);
+            this.listenTo(Backbone, 'navigate-add-film', this.navigateAddFilm);
         }
     });
 

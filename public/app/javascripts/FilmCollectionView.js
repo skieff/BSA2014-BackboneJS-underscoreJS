@@ -42,7 +42,7 @@ define(function(require){
         },
 
         onAddFilmClick: function() {
-            this.appRouter.navigateAddFilm();
+            Backbone.trigger('navigate-add-film');
         },
 
         onAddFilm: function() {
