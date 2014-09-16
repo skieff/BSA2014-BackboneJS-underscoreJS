@@ -3,7 +3,6 @@ define(function(require){
         FilmView = require("./FilmView"),
         FullScreenFilmView = require("./FullScreenFilmView");
 
-
     return Backbone.View.extend({
         el: '#films-view',
 
@@ -15,11 +14,7 @@ define(function(require){
 
         fullScreenView: null,
 
-        appRouter: null,
-
-        initialize: function(data){
-            this.appRouter = data.appRouter;
-
+        initialize: function(){
             /**
              * when view is initialized collection is not populated with models yet
              * so we have to use Deferred to suspend routing event listeners which
@@ -55,8 +50,7 @@ define(function(require){
             this.removeFullScreenView();
             this.hideList();
             this.fullScreenView = new FullScreenFilmView({
-                model: newFilm,
-                appRouter: this.appRouter
+                model: newFilm
             });
             this.$el.find('#film-details').append(this.fullScreenView.$el);
         },
@@ -91,8 +85,7 @@ define(function(require){
             if (film) {
                 this.hideList();
                 this.fullScreenView = new FullScreenFilmView({
-                    model: film,
-                    appRouter: this.appRouter
+                    model: film
                 });
                 this.$el.find('#film-details').append(this.fullScreenView.$el);
             } else {

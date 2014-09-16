@@ -7,10 +7,10 @@ define(function(require){
 
     domReady(function(){
         new FilmCollectionView({
-            collection: new FilmCollection(),
-            appRouter: new AppRouter()
+            collection: new FilmCollection()
         });
 
+        new AppRouter();
         Backbone.history.start();
     });
 });
