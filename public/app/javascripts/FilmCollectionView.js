@@ -1,102 +1,111 @@
-var FilmCollectionView = Backbone.View.extend({
-	el: '#films-view',
+define(function(require){
+    var Backbone = require("./backbone"),
+        FilmView = require("./FilmView"),
+        FullScreenFilmView = require("./FullScreenFilmView");
 
-    events: {
-        'click .add-film': 'onAddFilmClick'
-    },
 
-    syncPromise: null,
+    return Backbone.View.extend({
+        el: '#films-view',
 
-    fullScreenView: null,
+        events: {
+            'click .add-film': 'onAddFilmClick'
+        },
 
-	initialize: function(){
-        /**
-         * when view is initialized collection is not populated with models yet
-         * so we have to use Deferred to suspend routing event listeners which
-         * depends on collection state until collection sync event
-         *
-         * other solution is to populate collection alongside with page loading
-         */
-        var syncDeferred = $.Deferred();
+        syncPromise: null,
 
-        this.syncPromise = syncDeferred.promise();
+        fullScreenView: null,
 
-        this.listenToOnce(this.collection, 'sync', function(){
-            syncDeferred.resolve();
-        });
+        appRouter: null,
 
-        this.listenTo(this.collection, 'add', this.renderNewFilm);
-        this.listenTo(Backbone, 'showList', this.showList);
-        this.listenTo(Backbone, 'addNewFilm', this.onAddFilm);
-        this.listenTo(Backbone, 'viewFilmDetails', this.onViewFilmDetails);
-	},
+        initialize: function(data){
+            this.appRouter = data.appRouter;
 
-    onAddFilmClick: function() {
-        appRouter.navigateAddFilm();
-    },
+            /**
+             * when view is initialized collection is not populated with models yet
+             * so we have to use Deferred to suspend routing event listeners which
+             * depends on collection state until collection sync event
+             *
+             * other solution is to populate collection alongside with page loading
+             */
+            var syncDeferred = $.Deferred();
 
-    onAddFilm: function() {
-        this.syncPromise.then($.proxy(this._doAdd, this));
-    },
+            this.syncPromise = syncDeferred.promise();
 
-    _doAdd: function() {
-        var newFilm = this.collection.add({});
+            this.listenToOnce(this.collection, 'sync', function(){
+                syncDeferred.resolve();
+            });
 
-        this.removeFullScreenView();
-        this.hideList();
-        this.fullScreenView = new FullScreenFilmView({
-            model: newFilm
-        });
-        this.$el.find('#film-details').append(this.fullScreenView.$el);
-    },
+            this.listenTo(this.collection, 'add', this.renderNewFilm);
+            this.listenTo(Backbone, 'showList', this.showList);
+            this.listenTo(Backbone, 'addNewFilm', this.onAddFilm);
+            this.listenTo(Backbone, 'viewFilmDetails', this.onViewFilmDetails);
+        },
 
-    showList: function() {
-        this.removeFullScreenView();
-        this.$el.find('#films-container').show();
-        this.$el.find('.add-film').show();
-    },
+        onAddFilmClick: function() {
+            this.appRouter.navigateAddFilm();
+        },
 
-    removeFullScreenView: function() {
-        if (this.fullScreenView) {
-            this.fullScreenView.close();
-            this.fullScreenView = null;
-        }
-    },
+        onAddFilm: function() {
+            this.syncPromise.then($.proxy(this._doAdd, this));
+        },
 
-    hideList: function() {
-        this.$el.find('#films-container').hide();
-        this.$el.find('.add-film').hide();
-    },
+        _doAdd: function() {
+            var newFilm = this.collection.add({});
 
-    onViewFilmDetails: function(filmId) {
-        this.syncPromise.then($.proxy(this._doView, this, filmId));
-    },
-
-    _doView: function(filmId) {
-        var film = this.collection.findWhere({id: filmId});
-
-        this.removeFullScreenView();
-
-        if (film) {
+            this.removeFullScreenView();
             this.hideList();
             this.fullScreenView = new FullScreenFilmView({
-                model: film
+                model: newFilm,
+                appRouter: this.appRouter
             });
             this.$el.find('#film-details').append(this.fullScreenView.$el);
-        } else {
-            appRouter.navigateToTheList();
+        },
+
+        showList: function() {
+            this.removeFullScreenView();
+            this.$el.find('#films-container').show();
+            this.$el.find('.add-film').show();
+        },
+
+        removeFullScreenView: function() {
+            if (this.fullScreenView) {
+                this.fullScreenView.close();
+                this.fullScreenView = null;
+            }
+        },
+
+        hideList: function() {
+            this.$el.find('#films-container').hide();
+            this.$el.find('.add-film').hide();
+        },
+
+        onViewFilmDetails: function(filmId) {
+            this.syncPromise.then($.proxy(this._doView, this, filmId));
+        },
+
+        _doView: function(filmId) {
+            var film = this.collection.findWhere({id: filmId});
+
+            this.removeFullScreenView();
+
+            if (film) {
+                this.hideList();
+                this.fullScreenView = new FullScreenFilmView({
+                    model: film,
+                    appRouter: this.appRouter
+                });
+                this.$el.find('#film-details').append(this.fullScreenView.$el);
+            } else {
+                this.appRouter.navigateToTheList();
+            }
+        },
+
+        renderNewFilm: function(model){
+            var view = new FilmView({
+                model: model
+            });
+            this.$el.find('#films-container').append(view.$el);
         }
-    },
-
-	renderNewFilm: function(model){
-		var view = new FilmView({
-			model: model
-		});
-		this.$el.find('#films-container').append(view.$el);
-	}
-});
-
-var filmsView = new FilmCollectionView({
-	collection: films
+    });
 });
 
