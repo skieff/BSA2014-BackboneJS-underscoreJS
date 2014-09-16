@@ -96,7 +96,7 @@ define(function(require){
                 });
                 this.$el.find('#film-details').append(this.fullScreenView.$el);
             } else {
-                this.appRouter.navigateToTheList();
+                Backbone.trigger('navigate-to-the-list');
             }
         },
 

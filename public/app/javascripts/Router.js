@@ -26,6 +26,10 @@ define(function(require){
 
         navigateToTheList: function() {
             this.navigate('', {trigger: true});
+        },
+
+        initialize: function() {
+            this.listenTo(Backbone, 'navigate-to-the-list', this.navigateToTheList);
         }
     });
 
