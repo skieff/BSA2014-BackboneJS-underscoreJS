@@ -1,7 +1,11 @@
 define(function(require){
-    var Backbone = require('./backbone');
+    var Marionette = require('backbone.marionette'),
+        Backbone = require('backbone');
 
-    return Backbone.Router.extend({
+    return Marionette.AppRouter.extend({
+
+        channel: null,
+
         routes: {
             "films/new":     "newFilm",
             "films/:filmId":     "viewFilm",
@@ -9,15 +13,15 @@ define(function(require){
         },
 
         newFilm: function() {
-            Backbone.trigger('addNewFilm');
+            //Marionette.trigger('addNewFilm');
         },
 
         viewFilm: function(filmId) {
-            Backbone.trigger('viewFilmDetails', parseInt(filmId));
+            //Marionette.trigger('viewFilmDetails', parseInt(filmId));
         },
 
         viewList: function() {
-            Backbone.trigger('showList');
+            this.channel.commands.execute('view-list');
         },
 
         navigateAddFilm: function() {
@@ -29,8 +33,7 @@ define(function(require){
         },
 
         initialize: function() {
-            this.listenTo(Backbone, 'navigate-to-the-list', this.navigateToTheList);
-            this.listenTo(Backbone, 'navigate-add-film', this.navigateAddFilm);
+            this.channel = Backbone.Wreqr.radio.channel('global');
         }
     });
 

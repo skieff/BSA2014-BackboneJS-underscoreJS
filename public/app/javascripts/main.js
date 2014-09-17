@@ -1,16 +1,23 @@
 define(function(require){
-    var FilmCollection = require("./FilmCollection"),
-        FilmCollectionView = require("./FilmCollectionView"),
-        AppRouter = require("./Router"),
-        Backbone = require("./backbone"),
-        domReady = require("./domReady");
+    var Marionette = require("backbone.marionette"),
+        AppRouter = require("Router"),
+        Backbone = require("backbone"),
+        domReady = require("domReady");
 
     domReady(function(){
-        new FilmCollectionView({
-            collection: new FilmCollection()
+        var myApp = new Marionette.Application();
+
+        myApp.addInitializer(function(){
+            new AppRouter();
+            Backbone.history.start();
+
+
+            this.commands.setHandler('view-list', function() {
+                console.log(this);
+            });
+
         });
 
-        new AppRouter();
-        Backbone.history.start();
+        myApp.start();
     });
 });
