@@ -1,7 +1,36 @@
-BSA2014-BackboneJS-underscoreJS
 ===============================
-
 ##Hometask boilerplate for JS group after Backbone lecture.
+
+###What should be done?
+
+####V3
+
+- Complete previous task using Marionette.js meta-framework. ItemView, CollectionView, CompositeView components should be used.
+- Region component should be used to switch between films list and film details.
+- Behaviour should be added to change film container or films list container style on hover (for example, border should be added)
+
+####V2
+
+- Add support for Jade instead of HTML and Stylus instead of CSS to current project.
+- Convert all modules to AMD.
+- requirejs should be used to request single js file.
+- Use grunt to run jshint on project source
+
+####V1
+
+- Add possibility to add films.
+- Add possibility to rename films.
+- Add possibility to remove films.
+
+You should add a button for remove and add action.
+
+Rename can be done within on the same place, where now sits plain text with the name or in a separate place.
+Add implies inputs for name and year, id may be generated automatically.
+
+On item click, view should be changed to display film details with 'back to the list' button.
+Routing should work so that copying link and openning in new tab should open the same view you are in.
+
+BSA2014-BackboneJS-underscoreJS
 
 ###How to start the server
 - Install the [node.js](http://nodejs.org/)
@@ -25,26 +54,3 @@ node app.js
 ```
 localhost:3000
 ```
-
-###What should be done?
-
-####V1
-
-- Add possibility to add films.
-- Add possibility to rename films.
-- Add possibility to remove films.
-
-You should add a button for remove and add action.
-
-Rename can be done within on the same place, where now sits plain text with the name or in a separate place.
-Add implies inputs for name and year, id may be generated automatically. 
-
-On item click, view should be changed to display film details with 'back to the list' button. 
-Routing should work so that copying link and openning in new tab should open the same view you are in.
-
-####V2
-
-- Add support for Jade instead of HTML and Stylus instead of CSS to current project.
-- Convert all modules to AMD.
-- requirejs should be used to request single js file.
-- Use grunt to run jshint on project source
