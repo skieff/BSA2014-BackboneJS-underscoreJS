@@ -3,20 +3,20 @@
 
 ###What should be done?
 
-####V3
+####V4
 
 - Complete previous task using Marionette.js meta-framework. ItemView, CollectionView, CompositeView components should be used.
 - Region component should be used to switch between films list and film details.
 - Behaviour should be added to change film container or films list container style on hover (for example, border should be added)
 
-####V2
+####V3
 
 - Add support for Jade instead of HTML and Stylus instead of CSS to current project.
 - Convert all modules to AMD.
 - requirejs should be used to request single js file.
 - Use grunt to run jshint on project source
 
-####V1
+####V2
 
 - Add possibility to add films.
 - Add possibility to rename films.
