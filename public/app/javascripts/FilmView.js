@@ -1,6 +1,7 @@
 define(function(require){
     var $ = require('./jquery'),
-        Marionette = require('backbone.marionette');
+        Marionette = require('backbone.marionette'),
+        Wrap = require('behaviors/wrap');
 
     return Marionette.ItemView.extend({
         editMode: false,
@@ -15,6 +16,10 @@ define(function(require){
             'click .film-edit' : 'onEditClick',
             'click .film-edit-cancel' : 'onEditCancelClick',
             'click .film-edit-save' : 'onEditSaveClick'
+        },
+
+        behaviors: {
+            Wrap: {}
         },
 
         getTemplate: function() {

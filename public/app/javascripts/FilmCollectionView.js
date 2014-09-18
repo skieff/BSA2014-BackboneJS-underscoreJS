@@ -2,7 +2,8 @@ define(function(require){
     var Backbone = require("backbone"),
         FilmView = require("FilmView"),
         Marionette = require("backbone.marionette"),
-        $ = require('jquery');
+        $ = require('jquery'),
+        Wrap = require('behaviors/wrap');
 
     return Marionette.CompositeView.extend({
         template: '#films-view-template',
@@ -12,6 +13,10 @@ define(function(require){
 
         events: {
             'click .add-film': 'onAddFilmClick'
+        },
+
+        behaviors: {
+            Wrap: {}
         },
 
         initialize: function() {

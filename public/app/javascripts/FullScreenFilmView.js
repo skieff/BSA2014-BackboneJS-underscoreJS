@@ -1,6 +1,7 @@
 define(function(require){
     var Backbone = require("./backbone"),
-        Marionette = require("backbone.marionette");
+        Marionette = require("backbone.marionette"),
+        Wrap = require('behaviors/wrap');
 
     return Marionette.ItemView.extend({
         template: '#film-edit-full-screen-template',
@@ -13,6 +14,10 @@ define(function(require){
         events: {
             'click .back-to-list': 'onBackToListClick',
             'click .save-changes': 'onSaveChangesClick'
+        },
+
+        behaviors: {
+            Wrap: {}
         },
 
         initialize: function(){
