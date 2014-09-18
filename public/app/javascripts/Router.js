@@ -13,15 +13,15 @@ define(function(require){
         },
 
         newFilm: function() {
-            //Marionette.trigger('addNewFilm');
+            Backbone.trigger('router:new-film');
         },
 
         viewFilm: function(filmId) {
-            //Marionette.trigger('viewFilmDetails', parseInt(filmId));
+            Backbone.trigger('router:film-details', parseInt(filmId));
         },
 
         viewList: function() {
-            this.channel.commands.execute('view-list');
+            Backbone.trigger('router:view-list');
         },
 
         navigateAddFilm: function() {
@@ -33,7 +33,8 @@ define(function(require){
         },
 
         initialize: function() {
-            this.channel = Backbone.Wreqr.radio.channel('global');
+            this.listenTo(Backbone, 'view:navigate-add-film', this.navigateAddFilm);
+            this.listenTo(Backbone, 'view:navigate-view-list', this.navigateToTheList);
         }
     });
 

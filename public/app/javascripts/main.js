@@ -4,7 +4,8 @@ define(function(require){
         Backbone = require("backbone"),
         domReady = require("domReady"),
         FilmCollectionView = require("FilmCollectionView"),
-        FilmCollection = require("FilmCollection");
+        FilmCollection = require("FilmCollection"),
+        FullScreenFilmView = require("FullScreenFilmView");
 
     domReady(function(){
         var myApp = new Marionette.Application({
@@ -14,21 +15,23 @@ define(function(require){
         });
 
         myApp.addInitializer(function(){
-            new AppRouter();
-            Backbone.history.start();
-
-
-            this.commands.setHandler('view-list', function() {
-                console.log('view-list');
-            });
-        });
-
-        myApp.listenTo(myApp, 'start', function() {
             this.filmCollectionView = new FilmCollectionView({
                 collection: new FilmCollection(),
                 model: new Backbone.Model()
             });
 
+            new AppRouter();
+            Backbone.history.start();
+        });
+
+        myApp.listenTo(Backbone, 'view:edit-film', function(model) {
+            this.content.show(
+                new FullScreenFilmView({"model": model}),
+                {preventDestroy: (this.content.currentView === this.filmCollectionView)}
+            );
+        });
+
+        myApp.listenTo(Backbone, 'router:view-list', function() {
             this.content.show(this.filmCollectionView);
         });
 
