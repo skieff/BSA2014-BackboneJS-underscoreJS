@@ -5,6 +5,11 @@ define(function(require){
     return Marionette.ItemView.extend({
         template: '#film-edit-full-screen-template',
 
+        ui: {
+            filmName: '[name="filmName"]',
+            filmYear: '[name="filmYear"]'
+        },
+
         events: {
             'click .back-to-list': 'onBackToListClick',
             'click .save-changes': 'onSaveChangesClick'
@@ -21,8 +26,8 @@ define(function(require){
         onSaveChangesClick: function() {
             this.model.save(
                 {
-                    name: this.$el.find('[name="filmName"]').val(),
-                    year: this.$el.find('[name="filmYear"]').val()
+                    name: this.ui.filmName.val(),
+                    year: this.ui.filmYear.val()
                 },
                 {
                     wait:true,
