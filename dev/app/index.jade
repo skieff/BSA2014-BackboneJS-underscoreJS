@@ -5,10 +5,11 @@ html(lang='en')
         title Films service
         link(rel='stylesheet', href='./styles/style.css')
     body
-        #films-view
+        #content
+
+        script#films-view-template(type="text/template")
             #films-container
             button.add-film Add Film
-            #film-details
 
         script#film-template(type="text/template")
             span.film-id <%= id %>
