@@ -3,6 +3,14 @@
 
 ###What should be done?
 
+####V5
+
+Use such backbone plugins:
+- Local storage for change history
+- fetch-cache for caching film details
+- memento to store model states (add ability to revert film state)
+- validation - to validate created films
+
 ####V4
 
 - Complete previous task using Marionette.js meta-framework. ItemView, CollectionView, CompositeView components should be used.
