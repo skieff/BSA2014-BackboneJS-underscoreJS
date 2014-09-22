@@ -1,13 +1,23 @@
 define(function(require){
     var Backbone = require("./backbone"),
-        $ = require('./jquery');
+        Marionette = require("backbone.marionette"),
+        Wrap = require('behaviors/wrap');
 
-    return Backbone.View.extend({
-        template: _.template($('#film-edit-full-screen-template').html()),
+    return Marionette.ItemView.extend({
+        template: '#film-edit-full-screen-template',
+
+        ui: {
+            filmName: '[name="filmName"]',
+            filmYear: '[name="filmYear"]'
+        },
 
         events: {
             'click .back-to-list': 'onBackToListClick',
             'click .save-changes': 'onSaveChangesClick'
+        },
+
+        behaviors: {
+            Wrap: {}
         },
 
         initialize: function(){
@@ -15,33 +25,28 @@ define(function(require){
         },
 
         onBackToListClick: function(){
-            Backbone.trigger('navigate-to-the-list');
+            Backbone.trigger('view:navigate-view-list');
         },
 
         onSaveChangesClick: function() {
             this.model.save(
                 {
-                    name: this.$el.find('[name="filmName"]').val(),
-                    year: this.$el.find('[name="filmYear"]').val()
+                    name: this.ui.filmName.val(),
+                    year: this.ui.filmYear.val()
                 },
                 {
                     wait:true,
                     success: function(){
-                        Backbone.trigger('navigate-to-the-list');
+                        Backbone.trigger('view:navigate-view-list');
                     }
                 }
             );
         },
 
-        close: function() {
+        onDestroy: function() {
             if (this.model.isNew()) {
                 this.model.deleteFilm();
             }
-            this.remove();
-        },
-
-        render: function() {
-            this.$el.html(this.template(this.model.toJSON()));
         }
     });
 });

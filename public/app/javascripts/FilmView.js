@@ -1,12 +1,15 @@
 define(function(require){
-    var Backbone = require('./backbone'),
-        $ = require('./jquery');
+    var $ = require('./jquery'),
+        Marionette = require('backbone.marionette'),
+        Wrap = require('behaviors/wrap');
 
-    return Backbone.View.extend({
-        className: 'film-container',
-        template: _.template($('#film-template').html()),
-        editTemplate: _.template($('#film-edit-inline-template').html()),
+    return Marionette.ItemView.extend({
         editMode: false,
+
+        ui: {
+            filmName: '[name="filmName"]',
+            filmYear: '[name="filmYear"]'
+        },
 
         events : {
             'click .film-remove' : 'onRemoveClick',
@@ -15,10 +18,12 @@ define(function(require){
             'click .film-edit-save' : 'onEditSaveClick'
         },
 
-        initialize: function(){
-            this.listenTo(this.model, 'remove', this.onModelRemove);
-            this.listenTo(this.model, 'change', this.render);
-            this.render();
+        behaviors: {
+            Wrap: {}
+        },
+
+        getTemplate: function() {
+            return this.editMode ? '#film-edit-inline-template' : '#film-template';
         },
 
         switchToEditMode: function() {
@@ -46,27 +51,14 @@ define(function(require){
         onEditSaveClick: function() {
             this.model.save(
                 {
-                    name: this.$el.find('[name="filmName"]').val(),
-                    year: this.$el.find('[name="filmYear"]').val()
+                    name: this.ui.filmName.val(),
+                    year: this.ui.filmYear.val()
                 },
                 {
                     wait:true,
                     success: $.proxy(this.switchToReadOnlyMode, this)
                 }
             );
-        },
-
-        onModelRemove: function() {
-            this.remove();
-        },
-
-        render: function(){
-            if (this.editMode) {
-                this.$el.html(this.editTemplate(this.model.toJSON()));
-            } else {
-                this.$el.html(this.template(this.model.toJSON()));
-            }
-            return this;
         }
     });
 });

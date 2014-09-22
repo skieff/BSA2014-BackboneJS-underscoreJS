@@ -1,7 +1,11 @@
 define(function(require){
-    var Backbone = require('./backbone');
+    var Marionette = require('backbone.marionette'),
+        Backbone = require('backbone');
 
-    return Backbone.Router.extend({
+    return Marionette.AppRouter.extend({
+
+        channel: null,
+
         routes: {
             "films/new":     "newFilm",
             "films/:filmId":     "viewFilm",
@@ -9,15 +13,15 @@ define(function(require){
         },
 
         newFilm: function() {
-            Backbone.trigger('addNewFilm');
+            Backbone.trigger('router:new-film');
         },
 
         viewFilm: function(filmId) {
-            Backbone.trigger('viewFilmDetails', parseInt(filmId));
+            Backbone.trigger('router:film-details', parseInt(filmId));
         },
 
         viewList: function() {
-            Backbone.trigger('showList');
+            Backbone.trigger('router:view-list');
         },
 
         navigateAddFilm: function() {
@@ -29,8 +33,8 @@ define(function(require){
         },
 
         initialize: function() {
-            this.listenTo(Backbone, 'navigate-to-the-list', this.navigateToTheList);
-            this.listenTo(Backbone, 'navigate-add-film', this.navigateAddFilm);
+            this.listenTo(Backbone, 'view:navigate-add-film', this.navigateAddFilm);
+            this.listenTo(Backbone, 'view:navigate-view-list', this.navigateToTheList);
         }
     });
 
