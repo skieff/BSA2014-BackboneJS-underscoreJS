@@ -3,6 +3,11 @@
 
 ###What should be done?
 
+
+####V6
+
+Rewrite application using backbone/thorax.
+
 ####V5
 
 Use such backbone plugins:
